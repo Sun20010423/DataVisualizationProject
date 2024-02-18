@@ -1,0 +1,907 @@
+@media screen and (max-height: 667px) and (orientation: portrait) {
+    .game-block.BWIN .iframe-area {
+        height: calc(100% - 64px);
+        margin-top: -16px;
+    }
+}
+
+@media screen and (orientation: landscape) and (min-width: 400px) {
+
+    .game-block.Baccarat:after,
+    .game-block.gameView-landscape:after {
+        display: none;
+    }
+
+    .game-block.Baccarat .jackpot-area,
+    .game-block.gameView-landscape .jackpot-area {
+        display: none;
+    }
+
+    .game-block.Baccarat .iframe-area,
+    .game-block.gameView-landscape .iframe-area {
+        height: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+        flex-direction: row;
+    }
+
+    .game-block.kg_lobby .btn-gameClose-L {
+        position: fixed;
+        top: unset;
+        left: 0;
+        bottom: 8px;
+    }
+
+    .game-block.multiple-view {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .game-block.multiple-view .iframe-box {
+        flex: 1 1;
+        min-width: 33.3333%;
+    }
+
+    .game-block.multiple-view .iframe-box:last-child {
+        margin-bottom: 0;
+    }
+
+    .game-block.multiple-view .iframe-box.game-cq9 {
+        flex: unset;
+        width: 33.333%;
+    }
+
+    .game-block.BL_twmj2 .btn-gameClose-L {
+        position: fixed;
+        top: unset;
+        left: 0;
+        bottom: 36px;
+    }
+}
+
+/* 遊戲頁獎池 START */
+.jackpot-area {
+    width: 100%;
+    height: 64px;
+    /* background-image: url(/static/media/jackpot_bg.48f7167b.jpg); */
+    background-size: cover;
+    background-position: bottom;
+    position: relative;
+}
+
+.jackpot-area .jackpotImg {
+    width: 100px;
+    height: 56px;
+    /* background-image: url(/static/media/jackpot.f5e790f9.png); */
+    background-size: 100% 100%;
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+}
+
+.jackpot-area .jackpotMoney {
+    width: calc(100% - 156px);
+    position: absolute;
+    top: 4px;
+    right: 0;
+    color: #fff8e4;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+    padding: 0 4px 0 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    font-weight: 800;
+    font-stretch: 90%;
+}
+
+.jackpot-area .jackpotMoney span {
+    font-size: 27px;
+}
+
+.jackpot-area .jackpotMoney p {
+    font-size: 12px;
+    font-weight: 600;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+    color: #F4B63F;
+    margin: 0 0 0 4px;
+}
+
+.jackpot-area .timer {
+    min-width: 100px;
+    max-width: 131px;
+    height: 28px;
+    background-image: linear-gradient(to bottom, #fbc323, #fde397);
+    border: 4px solid #fafafa;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 16px 0 0 0;
+    padding: 0 4px;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-weight: 800;
+    font-stretch: 90%;
+}
+
+.jackpot-area .timer span {
+    color: #fff8e4;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+    margin: 0 2px;
+}
+
+.jackpot-area .jackpot-double {
+    width: 50px;
+    height: 40px;
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    z-index: 1;
+    -webkit-transform: translate(30%, 10px);
+    transform: translate(30%, 10px);
+}
+
+.jackpot-area .jackpot-double .btn-open-timer {
+    -webkit-animation: rubberBand2 0.8s infinite;
+    animation: rubberBand2 0.8s infinite;
+}
+
+.jackpot-area .jackpot-double .btn-open-timer img {
+    width: 100%;
+    height: 100%;
+}
+
+.jackpot-area .jackpot-double .double-timer {
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: 100%;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    z-index: 1;
+}
+
+.jackpot-area .jackpot-double .double-timer .tips-content {
+    background-image: linear-gradient(107deg, #fff8e4, #fff8e4);
+    color: #452201;
+    text-shadow: 1px 1px 0 #fff8e4;
+    box-shadow: 0 4px 8px 0 rgba(251, 141, 35, 0.24), inset -4px -4px 4px 0 rgba(205, 194, 162, 0.24), inset 4px 4px 4px 0 #fafafa;
+}
+
+.jackpot-area .jackpot-double .double-timer .tips-content:before {
+    color: #fff8e4;
+}
+
+.jackpot-area .jackpot-double .double-timer span {
+    margin: 0 2px;
+    color: #F4B63F;
+}
+
+.btn-add-game {
+    /* width: 82px;
+    height: 45px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background: none;
+    /* background-color: #fafafa; */
+    /* box-shadow: 0 8px 16px 0 rgba(127, 63, 2, 0.32); */
+    padding: 4px;
+    /* border-radius: 28px; */
+    position: absolute;
+    top: 6px;
+    left: 86px;
+    z-index: 10;
+}
+
+.btn-add-game .text {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(110deg, #00dda4, #03a57b);
+    box-shadow: 0 8px 16px 0 rgba(3, 165, 123, 0.48), inset -2px -4px 2px 0 rgba(0, 221, 164, 0.72), inset 0 2px 1px 0 rgba(255, 253, 247, 0.48);
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    color: #fff8e4;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+}
+
+.btn-add-game span:before {
+    color: #fff8e4;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+    margin-left: 4px;
+}
+
+
+
+.logo_icon {
+    position: absolute;
+    left: 130px;
+    top: 8px;
+    z-index: 9;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content_1 {
+    padding: 20px;
+}
+
+.content_item {
+    padding: 5px;
+}
+
+
+
+
+
+.game-popup-box .p-content .seleceGameLabel {
+    /* white-space: b; */
+
+    white-space: "break-spaces";
+    width: 36px;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.game-popup-box .p-content .btn-close {
+    width: 48px;
+    height: 48px;
+    margin: 0 8px 16px 8px;
+    background-color: #452201;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* background-image: url("./assets/hall/btn_close.png"); */
+    background: url("../../../assets/hall/btn_close.png");
+
+    /* background-image: linear-gradient(135deg, #fafafa, #e9f0f4); */
+    /* box-shadow: 0 8px 16px 0 rgba(69, 34, 1, 0.32), inset -2px -4px 2px 0 rgba(127, 63, 2, 0.16), inset 0 2px 1px 0 #fafafa; */
+    text-shadow: 1px 1px 0 #fff8e4;
+    color: #452201;
+    border-radius: 100%;
+    margin-bottom: 46px;
+}
+
+.game-popup-box .p-content .btn-close .icon-close:before {
+    font-size: 28px;
+    color: #7f3f02;
+    text-shadow: 1px 1px 0 #fff8e4;
+}
+
+.game-popup-box .p-content .btn-close:active {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+.game-popup-box .btn-get-tool {
+    min-width: 96px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #fafafa;
+    box-shadow: 0 8px 16px 0 rgba(69, 34, 1, 0.32);
+    padding: 4px;
+    border-radius: 28px;
+    margin: 0 8px 16px 8px;
+}
+
+.game-popup-box .btn-get-tool .text {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(135deg, #ff8700, #ff3700);
+    box-shadow: 0 8px 16px 0 rgba(251, 87, 35, 0.48), inset -2px -4px 2px 0 rgba(251, 141, 35, 0.72), inset 0 2px 1px 0 rgba(255, 253, 247, 0.48);
+    color: #fff8e4;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.game-popup-box .btn-get-tool:active {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+.game-popup-box .btn-get-tool .text {
+    font-size: 14px;
+    font-weight: 800;
+    font-stretch: 90%;
+}
+
+.game-popup-box .btn-confirm {
+    width: 120px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* background-color: #fafafa; */
+    background: url("../../../assets/hall/confirm.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* box-shadow: 0 8px 16px 0 rgba(127, 63, 2, 0.32); */
+    box-shadow: none;
+    padding: 4px;
+    /* border-radius: 28px; */
+    margin: 0 8px 16px 8px;
+    margin-top: 20px;
+}
+
+.game-popup-box .btn-confirm .text {
+    width: 100%;
+    height: 100%;
+    /* background-image: linear-gradient(110deg, #00dda4, #03a57b); */
+    /* box-shadow: 0 8px 16px 0 rgba(3, 165, 123, 0.48), inset -2px -4px 2px 0 rgba(0, 221, 164, 0.72), inset 0 2px 1px 0 rgba(255, 253, 247, 0.48); */
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    color: #fff8e4;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+}
+
+.game-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-animation: popup-zoomIn 0.5s;
+    animation: popup-zoomIn 0.5s;
+}
+
+.game-popup .adImg-box {
+    width: 320px;
+    height: 320px;
+}
+
+.game-popup .adImg-box img {
+    width: 100%;
+    height: 100%;
+}
+
+.game-popup button {
+    margin: -28px auto 0 auto;
+    background-color: transparent;
+    display: block;
+}
+
+.game-popup button .btn-golink,
+.game-popup button .btn-goStore {
+    width: 160px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #fafafa;
+    box-shadow: 0 8px 16px 0 rgba(69, 34, 1, 0.32);
+    padding: 4px;
+    border-radius: 28px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.game-popup button .btn-golink .text,
+.game-popup button .btn-goStore .text {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(135deg, #ff8700, #ff3700);
+    box-shadow: 0 8px 16px 0 rgba(251, 87, 35, 0.48), inset -2px -4px 2px 0 rgba(251, 141, 35, 0.72), inset 0 2px 1px 0 rgba(255, 253, 247, 0.48);
+    color: #fff8e4;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.game-popup button .btn-golink:active,
+.game-popup button .btn-goStore:active {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+.game-popup button .btn-golink .text,
+.game-popup button .btn-goStore .text {
+    font-size: 19px;
+    font-weight: 800;
+    font-stretch: 90%;
+}
+
+.game-popup .btn-golink,
+.game-popup .btn-goStore {
+    width: 160px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #fafafa;
+    box-shadow: 0 8px 16px 0 rgba(69, 34, 1, 0.32);
+    padding: 4px;
+    border-radius: 28px;
+    margin: -28px auto 0 auto;
+    position: relative;
+}
+
+.game-popup .btn-golink .text,
+.game-popup .btn-goStore .text {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(135deg, #ff8700, #ff3700);
+    box-shadow: 0 8px 16px 0 rgba(251, 87, 35, 0.48), inset -2px -4px 2px 0 rgba(251, 141, 35, 0.72), inset 0 2px 1px 0 rgba(255, 253, 247, 0.48);
+    color: #fff8e4;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.game-popup .btn-golink:active,
+.game-popup .btn-goStore:active {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+.game-popup .btn-golink .text,
+.game-popup .btn-goStore .text {
+    font-size: 19px;
+    font-weight: 800;
+    font-stretch: 90%;
+}
+
+.game-popup .agreeBox {
+    width: 70%;
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.game-popup .agreeBox .checkmark {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: -12px;
+    left: 0;
+}
+
+.game-popup .agreeBox .checkmark:after {
+    content: "\e927";
+    font-family: "icomoon" !important;
+    border: none;
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    font-size: 14px;
+}
+
+.game-popup .agreeBox>span {
+    padding-left: 32px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #fff8e4;
+    text-shadow: 1px 1px 0 rgba(69, 34, 1, 0.48);
+}
+
+.game-block .game_user_header {
+    background-color: #00000066;
+    padding: 10px;
+    font-size: 20px;
+    padding: 5px 20px;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+
+}
+
+.userImg {
+    background-color: #717171;
+    border-radius: 100%;
+    width: 42px;
+    height: 42px;
+    display: block;
+    text-align: center;
+    justify-content: center;
+}
+
+.userName {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.game-block .game_user_header img {
+    /* border-radius: 100%; */
+    width: 38px;
+    height: 38px;
+    text-align: center;
+    margin-top: 2px;
+}
+
+.game-block .game_roomid {
+    text-align: center;
+    margin: 10px;
+    color: #ff3700;
+    font-weight: 600;
+    font-size: 18px;
+    /* text-shadow: 1px 1px 0 #fff8e4; */
+    text-shadow: 1.5px 1.5px 0 #fff8e4, 1px -1px 0 #fff8e4, -1px -1px 0 #fff8e4, -1px 1px 0 #fff8e4, 1px 1px 0 #fff8e4;
+
+}
+
+.game-block .game_bet_data {
+    text-align: center;
+    background-color: #00000088;
+
+}
+
+.game-block .game_line {
+    margin: 10px;
+}
+
+.game-block .game_bet_data ul {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.game-block .game_bet_data ul li {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 30%;
+    padding: 10px;
+
+
+}
+
+
+
+.game-block .game_a_b_c .game_bet_item {
+    /* display: flex; */
+    width: 33.3%;
+    text-align: center;
+
+}
+
+.game-block .game_a_b_c .game_bet_item.hover {
+    background-color: #ffffff33;
+    box-shadow: 0 0px 15px #e99f00;
+}
+
+.game-block .game_a_b_c .game_bet_item .text {
+
+    justify-items: center;
+    margin-top: 30%;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffff00;
+
+
+}
+
+.game-block .game_a_b_c .game_bet_item img {
+    width: 90%;
+    margin-top: 10px;
+}
+
+.game-block .game_bets {
+    display: flex;
+    justify-content: center;
+}
+
+.game-block .game_bets .game_put_item {
+    /* display: flex; */
+    width: 90px;
+    /* height: 23%; */
+    text-align: center;
+    justify-content: center;
+    margin: 10px 0px;
+
+
+}
+
+@keyframes circle_100 {
+    0% {
+        opacity: 0.4;
+    }
+
+    40% {
+        opacity: 0.7;
+        box-shadow: 0 0px 15px #054499;
+        /*三层阴影*/
+    }
+
+    100% {
+        box-shadow: 0 0px 15px #054499;
+        transform: scale(1.2);
+        /*放大两倍*/
+        /* opacity: 0; */
+    }
+}
+
+@keyframes circle_500 {
+    0% {
+        opacity: 0.4;
+    }
+
+    40% {
+        opacity: 0.7;
+        box-shadow: 0 0px 15px rgba(0, 221, 164, 1.0);
+        /*三层阴影*/
+    }
+
+    100% {
+        box-shadow: 0 0px 15px rgba(0, 221, 164, 1.0);
+        transform: scale(1.2);
+        /*放大两倍*/
+        /* opacity: 0; */
+    }
+}
+
+
+@keyframes circle_1000 {
+    0% {
+        opacity: 0.4;
+    }
+
+    40% {
+        opacity: 0.7;
+        box-shadow: 0 0px 15px #fbeb95;
+        /*三层阴影*/
+    }
+
+    100% {
+        box-shadow: 0 0px 15px #fbeb95;
+        transform: scale(1.2);
+        /*放大两倍*/
+        /* opacity: 0; */
+    }
+}
+
+@keyframes circle_5000 {
+    0% {
+        opacity: 0.4;
+    }
+
+    40% {
+        opacity: 0.7;
+        box-shadow: 0 0px 15px #990505;
+        /*三层阴影*/
+    }
+
+    100% {
+        box-shadow: 0 0px 15px #990505;
+        transform: scale(1.2);
+        /*放大两倍*/
+        /* opacity: 0; */
+    }
+}
+
+
+.game-block .game_bets .game_put_item.bet_5000.hover {
+    /* animation: circle_5000 0.75s ease-out 75ms; */
+    box-shadow: 0 0px 15px #fbeb95;
+}
+
+.game_bet_btns {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+
+
+
+.game_bet_btns>div {
+
+    /* justify-items: center;
+    justify-content: space-between;
+    text-align: center; */
+}
+
+.game_user_footer {
+    display: flex;
+
+    justify-items: center;
+    justify-content: space-between;
+    /* justify-self: */
+    text-align: center;
+    margin: 10px 0px;
+
+}
+
+.game_user_footer>div {
+    display: flex;
+    width: 44%;
+    justify-items: center;
+    /* justify-content: space-between; */
+    /* justify-self: */
+    text-align: center;
+
+    background-color: #00000066;
+    padding: 5px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    /* font-size: 20px; */
+    /* padding: 10px 20px; */
+    border-radius: 10px;
+}
+
+.game_user_footer>div img {
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 28px;
+    height: 28px;
+
+}
+
+.game_user_footer>div span {
+    color: #ffff00;
+    font-size: 16px;
+}
+
+.pc-game-block {
+    padding: 10px;
+}
+
+.pc-game-block .pc-btn {
+    background-color: #00dda4;
+    border-radius: 10px;
+    padding: 5px;
+    max-width: 160px;
+    min-width: 60px;
+    margin: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pc-game-block .pc-btn.cancel {
+    background-color: #ddd;
+}
+
+.pc-content {
+    display: flex;
+    justify-content: center;
+}
+
+.pc-content-1 {
+    width: 25%;
+}
+
+.pc-content-2 {
+    width: 55%;
+}
+
+.pc-content-3 {
+    width: 10%;
+}
+
+.pc-content-btns {
+    /* background-color: #054499; */
+    width: 100%;
+    display: flex;
+    padding: 10px;
+}
+
+.pc-content-btns .pc-btn {
+    width: 60px;
+
+}
+
+.pc-content-btns .pc-btn.active,
+.pc-game-block .pc-btn.active {
+
+    background-color: #e99f00;
+}
+
+.input_text {
+    border: 1px solid #ddd;
+    width: 120px;
+    border-radius: 5px;
+    margin: 0px 10px;
+}
+
+.select_zhuang {
+    width: 120px;
+}
+
+.input_select {
+    border: 1px solid #ddd;
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    padding: 5px;
+}
+
+.login_page {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 10%;
+}
+
+.login_page .title {
+    margin: 10px;
+}
+
+.login_page .logo {
+
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+
+}
+
+.video_content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+}
+
+.video_content .video_player {
+
+    width: 100%;
+    height: 100%;
+}
+
+.video_status {
+    margin: 10px;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+}
+
+
+.content_item {
+    /* display: flex; */
+    width: 100%;
+}
+
+/* className='pc-content-1' */

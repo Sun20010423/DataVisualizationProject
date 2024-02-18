@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#fbc323">
+  <meta name="description" content="打開 LINE 就能玩，免下載，免安裝，加入公會領福利，奏伙開獎奏伙勝！跟著兄弟們擱拼一道 MEGA WIN!">
+  <meta name="facebook-domain-verification" content="244xywqyu8w48kylj39c91xs2nocp5">
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <link rel="stylesheet" type="text/css" href="res/game.css" />
+
+  <title>大家樂</title>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script>
+
+    const JOIN_GAME_REG = "rsg/login_gameid";
+    const JOIN_GAME_HS = "hs/login_game";
+    const JOIN_GAME_BTG = "btg/login_game";
+    const JOIN_GAME = "btg/login_game";
+    const GAME_SITE_TYPE = {
+      BTG: "btg",
+      HS: "hs",
+      RSG: "rsg",
+    }
+
+    async function sendRequest(url, apis, params, errorCallback = null, debug = false, token = "") {
+
+      // $.post("demo_test.html", function (data, status) {
+      //   alert("Data: " + data + "nStatus: " + status);
+      // });
+
+
+      return new Promise(function (resolve, reject) {
+        //做一些异步操作
+        // setTimeout(function () {
+        //   console.log('执行完成');
+        //   resolve('随便什么数据');
+        // }, 2000);
+
+        $.ajax({
+          url: `${url}`,
+          type: 'POST',
+          data: params,
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'mode': "cors"
+          },
+          success: function (response) {
+            // 处理请求成功的逻辑
+            // console.log("joinGame response", response);
+            resolve(response);
+
+
+          },
+          error: function (xhr, status, error) {
+            // 处理请求失败的逻辑
+            // console.log("joinGame error", xhr, status, error);
+            reject(error);
+
+          }
+        });
+      });
+
+
+    }
+
+
+    function getApis(api, postData, routeStr = "", token = null) {
+
+      // const route = routeStr != "" ? routeStr : api.split('/')[0].toUpperCase();
+      // const apis = Constant.API_URLS[route.toUpperCase()];
+      // const ROOT_API = Constant.IS_DEBUG ? `${apis.debug}${api}` : `${apis.public}${api}`;
+      let formData = new FormData();
+      let postString = "";
+      Object.keys(postData).forEach((key) => {
+        formData.append(key, postData[key]);
+        postString += `${key}=${postData[key]}&`
+        // console.log('postData', key, postData[key], RsaService.publicEncrypt(postData[key]));
+      });
+
+      postString = postString.substring(0, postString.length - 1);
+      console.log("postString", postString);
+      const headers = {
+        "mode": "cors",
+        "content-type": "application/x-www-form-urlencoded"
+      };
+      return {
+        url: "https://main.bigpapa777.com",
+        baseUrl: "https://main.bigpapa777.com",
+        api,
+        options: {
+          method: 'POST',
+          headers,
+          body: postString
+        },
+      };
+    };
+
+    function getRouter(gameCode, gameType) {
+      let params = { gameCode, lang: "zh-tw" };
+      let router = JOIN_GAME;
+      if (gameType == GAME_SITE_TYPE.BTG) {
+        params = { gameCode, lang: "zh-tw" };
+        router = JOIN_GAME_BTG;
+        // JOIN_GAME_HS: "hs/login_game",
+        // JOIN_GAME_BTG: "btg/login_game",
+      } else if (gameType == GAME_SITE_TYPE.RSG) {
+        router = JOIN_GAME_REG;
+        params = { gameid: parseInt(gameCode) };
+      } else {
+        params = { gameCode: gameCode, lang: "zh-tw" }
+        router = JOIN_GAME_HS;
+      }
+      const apis = getApis(router, params, 'hall');
+
+      return {
+        apis,
+        params,
+      }
+    }
+
+    async function joinGame(gameCode, gameType, token) {
+
+
+
+      try {
+
+        const { apis, params } = getRouter(gameCode, gameType)
+        console.log("joinGame", gameCode, gameType, apis, params, token);
+
+        const responseJson = await sendRequest(
+          `${apis.url}/${apis.api}`,
+          apis.options,
+          params,
+          () => { },
+          false,
+          token
+          // tokenInfo.accessToken,
+          // dispatch,
+        );
+        console.log("joinGame responseJson", responseJson);
+        return responseJson;
+      } catch (error) {
+
+        console.log("joinGame error", error);
+
+      }
+
+
+
+    }
+
+  </script>
+
+
+  <style type="text/css">
+    .marquee-container {
+      overflow-x: hidden !important;
+      display: flex !important;
+      flex-direction: row !important;
+      position: relative;
+      width: 100%;
+    }
+
+    .marquee-container:hover div {
+      animation-play-state: var(--pause-on-hover);
+    }
+
+    .marquee-container:active div {
+      animation-play-state: var(--pause-on-click);
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .overlay::before,
+    .overlay::after {
+      background: linear-gradient(to right, var(--gradient-color));
+      content: "";
+      height: 100%;
+      position: absolute;
+      width: var(--gradient-width);
+      z-index: 2;
+    }
+
+    .overlay::after {
+      right: 0;
+      top: 0;
+      transform: rotateZ(180deg);
+    }
+
+    .overlay::before {
+      left: 0;
+      top: 0;
+    }
+
+    .marquee {
+      flex: 0 0 auto;
+      min-width: 100%;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      animation: scroll var(--duration) linear var(--delay) var(--iteration-count);
+      animation-play-state: var(--play);
+      animation-delay: var(--delay);
+      animation-direction: var(--direction);
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+
+
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+
+  <div class="game-block multiple-view Baccarat  ">
+
+
+    <div class="react-draggable-div">
+      <div class="react-draggable" style="transform: translate(0px, 0px);">
+
+      </div>
+    </div>
+
+    <div class="game-header ">
+
+    </div>
+    <button class="btn-gameClose-L" id="backBtn">
+      <img src="./res/back.png" width="84" height="58">
+    </button>
+
+    <button class="btn-add-game">
+      <img src="./res/more.png" width="90" height="58">
+    </button>
+    <div class="logo_icon">
+
+      <img src="./res/logo.png" width="128" height="58">
+    </div>
+    <div class="jackpot-area no-jackpot"></div>
+    <div class="online-members-block">
+      <div class="number-box">本遊戲在線人數:<span>0</span></div>
+      <div>
+        <div class="userBox stay" style="transform: translate(0px, 0px); opacity: 1;">
+          <div class="userImg"></div>
+        </div>
+        <div class="userBox stay" style="transform: translate(0px, 0px); opacity: 1;">
+          <div class="userImg"><img
+              src="https://profile.line-scdn.net/0hV9P5N8pWCRZ9TBplWN53aQ0cCnxePVAEVykUdEEfUXQTfhkQBClDdU8cBCVDL0cTWSNOJBhIACNxX35wYxr1Inp8VyFEe0hIVipD8Q"
+              alt=""></div>
+        </div>
+        <div class="userBox" style="transform: translate(0px, 0px); opacity: 1;">
+          <div class="userImg"><img
+              src="https://profile.line-scdn.net/0h4xchiHEBa1dOEXnWW9IVKD5BaD1tYDJFZiMjYXsRMGIkdn5WMHEmMS4QYGN1cypRMSBxZngZM2NCAhwxUEeXY0khNWB3JioJZXchsA"
+              alt=""></div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="iframe-area">
+      <div style="width: 100%; height: 100%;">
+        <div class="iframe-box" id="">
+          <!-- <iframe id="iframe__361" title="game" src="" class="" frameborder="0"></iframe> -->
+          <iframe title="game" src="" class="" frameborder="0"></iframe>
+
+        </div>
+      </div>
+      <div class="iframe-area-2" style="width: 100%; height: 100%;display: none;"></div>
+
+    </div>
+  </div>
+
+  <div>
+    <div class="game-popup-box game-mask" id="game_view">
+      <div class="p-content">
+        <div class="game-full-popup">
+          <div class="multiple-game-block">
+            <h4>可選擇同時最多两款遊戲同時玩</h4>
+            <ul class="list">
+
+            </ul>
+          </div>
+
+          <!-- <div class="gameCard pick"><img src="https://img.kimbaba.com.tw/game/CQ9/cq9_ta26_zh.webp" effect="blur" alt=""><div class="btn-delete"><span class="icon-delete"></span></div></div> -->
+          <div class="currentBox">
+            <div class="pick-box">
+              <p>已選遊戲</p>
+              <div class="gameCard pick" id="pick_1">
+                <img src="" effect="blur" alt="">
+              </div>
+              <div class="gameCard game-empty" id="pick_2">
+                <div class="gameIcon"><img src="./res/none.png" alt="">
+                </div>
+                <!-- <span>空的</span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="close-footer">
+          <div class="btn-close"></div>
+          <!-- <div class="btn-confirm">
+
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    // import './index.css';
+    // import liff from '@line/liff'
+    var targetTimeId = null;
+    var pickGames = [];
+    var allGames = [];
+    var liffObject = {};
+    var isDebug = true;
+    var currentPickGame = {};
+
+    if (!isDebug) {
+
+      document.addEventListener("DOMContentLoaded", function () {
+        liff
+          .init({ liffId: '2001107775-71kL8jJz' })
+          .then(() => {
+            console.log("Success! you can do something with LIFF API here.")
+            // liff.login();
+
+            if (liff.isLoggedIn()) {
+              // getUserProfile()
+              liff.getProfile()
+                .then((result) => {
+                  // PROFILE = result;
+                  // alert("login in success!" + result.displayName);
+
+                  localStorage.setItem("liffInfo", JSON.stringify(result));
+                  // alert("load liffData ===== " + JSON.stringify({ result }));
+
+                  // document.getElementById('profileName').textContent = 'Hi, ' + result.displayName;
+                })
+            } else {
+              liff.login()
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      });
+
+    }
+
+
+
+
+    function getOsInfo() {
+      var userAgent = navigator.userAgent.toLowerCase();
+      return { userAgent };
+    }
+    try {
+
+
+      function createHtml(url) {
+        const html = `<div style="width: 100%; height: 100%;">
+            <div class="iframe-box" id="">
+              <iframe title="game" src="${url}" class="" frameborder="0"></iframe>
+
+            </div>
+          </div>`
+
+        return html;
+
+      }
+
+
+      function removeGame(delGameCode, pos) {
+        // const delGameCode = elemt.attr("gameCode");
+
+        const cls = `#pick_${(pos + 1)}`;
+        console.log("delGameCode", delGameCode, pos, cls);
+        // const findIndex = pickGames.findIndex(d => d == delGameCode)
+        $(`#pick_${(parseInt(pos) + 1)}`).html(`<div class="gameIcon"><img src="./res/none.png" alt=""></div>
+                  <span></span>`);
+        pickGames = pickGames.filter(d => d != delGameCode)
+        console.log("pickGames", pickGames);
+
+        $('.list .gameCard').each((index, element) => {
+          console.log("element", element);
+          const elm = $(element);
+          const cgameCode = $(element).attr("gameCode");
+          if (cgameCode == delGameCode) {
+            elm.removeClass('pick');
+            elm.find(".icon-check").remove();
+          }
+
+        })
+
+      }
+
+      $(document).ready(function () {
+        // bInfo = getOsInfo();
+        // $(".debug_info").html(JSON.stringify(bInfo));
+
+        $('#game_view,.game-block').hide();
+
+        $('.btn-add-game').click(() => {
+
+          $('#game_view').show();
+
+        })
+
+        $('.btn-close').click(() => {
+          $('#game_view').hide();
+        })
+
+        // window.closeGameScreen();
+
+        $('.iframe-area').html(``);
+
+        $('#backBtn').click(() => {
+
+          $('#game_view').hide();
+          $('.game-block').hide();
+
+          $('.iframe-area').html(``);
+
+        })
+
+
+
+
+
+
+
+
+      })
+
+
+
+      window.addEventListener("load", rotate, false);
+      window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", rotate, false);
+      function rotate() {
+        if (window.orientation == 180 || window.orientation == 0) {
+          console.log('竖屏')
+          if (currentPickGame.manyGams > 0) {
+            $('.online-members-block,.logo_icon,.game-header,.btn-add-game').show();
+          } else {
+            $('.online-members-block,.logo_icon,.game-header').show();
+          }
+
+        }
+        if (window.orientation == 90 || window.orientation == -90) {
+          console.log('横屏')
+          // $('.online-members-block,.logo_icon,.game-header,.btn-add-game').hide();
+
+          if (currentPickGame.manyGams > 0) {
+            $('.online-members-block,.logo_icon,.game-header,.btn-add-game').hide();
+          } else {
+            $('.online-members-block,.logo_icon,.game-header').hide();
+          }
+        }
+      }
+
+
+      window.closeGameScreen = function () {
+        // $('.g-wrap').css({ display: "none" })
+        // $('#container').show();
+        // $('#GameDiv').css({ display: "block" })
+
+        $('#game_view').hide();
+        $('.game-block').hide();
+
+        $('.iframe-area').html(``);
+
+      }
+
+      window.resizeGameSize = async function (currentGame, url, getRouter, games, token) {
+        $('#game_view').hide();
+        $('.game-block').show();
+        currentPickGame = currentGame;
+        const manyGams = games.filter(d => d.gameMany > 0);
+        console.log("currentGame", currentGame, getRouter);
+        pickGames.push(currentGame.gameCode);
+
+        if (currentGame.gameMany > 0) {
+          $('.btn-add-game').show();
+        } else {
+          $('.btn-add-game').hide();
+        }
+
+        allGames = games;
+
+        const html = createHtml(url);
+
+        $('.iframe-area').html(`${html}<div class="iframe-area-2"></div>`);
+
+        setTimeout(() => {
+
+          manyGams.forEach(element => {
+            if (currentGame.gameCode == element.gameCode) {
+              $('.game-popup-box .list').append(`<li class="gameCard pick" gameCode="${element.gameCode}"><div class="icon-check"></div><img src="${element.imageUrl}" effect="blur"
+                        alt=""></li>`);
+            } else {
+              $('.game-popup-box .list').append(`<li class="gameCard" gameCode="${element.gameCode}"><img src="${element.imageUrl}" effect="blur"
+                        alt=""></li>`);
+            }
+          });
+
+          $('#pick_1').html(`<img src="${currentGame.imageUrl}" effect="blur" alt="">`);
+
+          $('.list .gameCard').click(async (event) => {
+
+            const elemt = $(event.target);
+            const gameCode = elemt.attr("gameCode");
+            const findGame = manyGams.find(d => d.gameCode == gameCode);
+            console.log("findGame", findGame, gameCode);
+            if (pickGames.length == 2 && !pickGames.includes(gameCode) || (currentGame.gameCode == gameCode)) {
+
+              return;
+            }
+            if (!pickGames.includes(gameCode)) {
+              pickGames.push(gameCode);
+              elemt.prepend(`<div class="icon-check"></div>`)
+              elemt.addClass('pick');
+
+              if (pickGames.length == 2) {
+                $('#pick_2').html(`<img src="${findGame.imageUrl}" effect="blur" alt=""><div class="btn-delete" gameCode="${gameCode}" onclick="removeGame('${gameCode}', '1')"></div>`).addClass("pick").removeClass("game-empty").attr("gameCode", gameCode);
+              }
+            } else {
+              elemt.removeClass('pick');
+              elemt.find(".icon-check").remove();
+              $(`#pick_2`).html(`<div class="gameIcon"><img src="./res/none.png" alt=""></div>`).removeClass("pick").addClass("game-empty").attr("gameCode", "");
+              pickGames = pickGames.filter(d => d != gameCode)
+            }
+            console.log("pickGames", pickGames);
+          })
+
+        }, 300)
+
+        var pickGameLinks = [];
+        $('.btn-confirm').click(async () => {
+          pickGameLinks = [];
+          for (let index = 0; index < pickGames.length; index++) {
+            const pickGame = pickGames[index];
+
+            if (currentGame.gameCode == pickGame) {
+              continue;
+            }
+
+            const gameDataInfo = allGames.find(d => d.gameCode == pickGame);
+            console.log("pickGame", pickGame, gameDataInfo);
+            const getGameLink = await joinGame(gameDataInfo.gameCode, gameDataInfo.gameType, token);
+            console.log("joinGame token", token, getGameLink);
+            if (getGameLink.success) {
+              pickGameLinks.push(getGameLink.link);
+            }
+          }
+
+          $('.game-popup-box').hide();
+          // pickGameLinks
+          let html = ``;
+          for (let index = 0; index < pickGameLinks.length; index++) {
+            const element = pickGameLinks[index];
+            html += `  <div style="width: 100%; height: 100%;">
+            <div class="iframe-box">
+              <iframe title="game" src="${element}" frameborder="0"></iframe>
+            </div>
+          </div>`;
+          }
+          if (pickGameLinks.length > 0) {
+            $('.iframe-area-2').html(`${html}`).show();
+          } else {
+            $('.iframe-area-2').html(`${html}`).hide();
+          }
+
+        })
+
+
+
+        $('#GameDiv').css({ display: "none" })
+        $('.g-wrap').css({ display: "block" })
+
+      }
+
+      window.resizeBTGGame = function (url) {
+        $('#GameDiv').css({ display: "none" })
+        $('.g-wrap').css({ display: "block" })
+        $('.iframe-box').html(`<iframe title="game" src="${url}" frameborder="0"></iframe>`);
+      }
+
+      window.autoResizeBTGGame = function () {
+        // $("#webview").attr("allowfullscreen", "0").css({ width: '640px', height: '960px' })
+        // $("#webview-wrapper").css({ top: '-280px' })
+      }
+
+    } catch (error) {
+
+      $('.debug_info').html("error 2");
+      console.log("error", error);
+      alert("error 2", error);
+
+    }
+
+
+  </script>
+</body>
+
+</html>

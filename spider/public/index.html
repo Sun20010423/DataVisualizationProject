@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+  <script charset="utf-8" src="%PUBLIC_URL%/nosleep.js"></script>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#fbc323">
+  <meta name="description" content="打開 LINE 就能玩，免下載，免安裝，加入公會領福利，奏伙開獎奏伙勝！跟著兄弟們擱拼一道 MEGA WIN!">
+  <meta name="facebook-domain-verification" content="244xywqyu8w48kylj39c91xs2nocp5">
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon.svg" />
+  <title>SpiderServer</title>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <style type="text/css">
+    .marquee-container {
+      overflow-x: hidden !important;
+      display: flex !important;
+      flex-direction: row !important;
+      position: relative;
+      width: 100%;
+    }
+
+    .marquee-container:hover div {
+      animation-play-state: var(--pause-on-hover);
+    }
+
+    .marquee-container:active div {
+      animation-play-state: var(--pause-on-click);
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .overlay::before,
+    .overlay::after {
+      background: linear-gradient(to right, var(--gradient-color));
+      content: "";
+      height: 100%;
+      position: absolute;
+      width: var(--gradient-width);
+      z-index: 2;
+    }
+
+    .overlay::after {
+      right: 0;
+      top: 0;
+      transform: rotateZ(180deg);
+    }
+
+    .overlay::before {
+      left: 0;
+      top: 0;
+    }
+
+    .marquee {
+      flex: 0 0 auto;
+      min-width: 100%;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      animation: scroll var(--duration) linear var(--delay) var(--iteration-count);
+      animation-play-state: var(--play);
+      animation-delay: var(--delay);
+      animation-direction: var(--direction);
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+
+
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+
+  <script>
+
+    var isDebug = true;
+
+    var noSleep = new NoSleep();
+
+    document.addEventListener('click', function enableNoSleep() {
+      document.removeEventListener('click', enableNoSleep, false);
+      noSleep.enable();
+    }, false);
+
+    if (!isDebug) {
+
+      document.addEventListener("DOMContentLoaded", function () {
+        liff
+          // .init({ liffId: '2001107775-71kL8jJz' })
+          // .init({ liffId: '2000919125-KWZkvXWE' })
+          .init({ liffId: '2003176402-mBdyn0eY' })
+          // 2000919125-KWZkvXWE
+          .then(() => {
+            console.log("Success! you can do something with LIFF API here.")
+            // liff.login();
+
+            if (liff.isLoggedIn()) {
+              // getUserProfile()
+              liff.getProfile()
+                .then((result) => {
+                  // PROFILE = result;
+                  // alert("login in success!" + result.displayName);
+
+                  localStorage.setItem("liffInfo", JSON.stringify(result));
+                  // alert("load liffData ===== " + JSON.stringify({ result }));
+
+                  // document.getElementById('profileName').textContent = 'Hi, ' + result.displayName;
+                })
+            } else {
+              liff.login()
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      });
+
+    }
+
+  </script>
+</body>
+
+</html>
